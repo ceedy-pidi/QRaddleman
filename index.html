@@ -197,7 +197,7 @@ body {
 
     <div class="profile-container">
         <div class="profile-overlay">
-            <img src="img.jpg" class="profile-img" id="profilePic" crossorigin="anonymous">
+            <img src="img.jpg" class="profile-img">
 
             <div class="profile-name">Charles David G. Estrella</div>
             <div class="profile-role">OJT / Intern</div>
@@ -227,6 +227,11 @@ body {
             <div class="contact-item">
                 <label>Viber</label>
                 <p>0951-901-4466</p>
+            </div>
+
+            <div class="contact-item">
+                <label>Facebook</label>
+                <p href="https://www.facebook.com/charles.estrella05">Charles Estrella</p>
             </div>
         </div>
     </div>
@@ -263,16 +268,17 @@ body {
 </body>
 </html>
 <script>
-async function saveContact() {
-
-    const btn = document.getElementById("saveB");
-    btn.innerText = "Saving...";
-    btn.disabled = true;
-
-    try {
-        const base64Image = await getBase64FromImage("profilePic");
-
-        const vcard = `
+function saveContact() {
+    const saveButton = document.getElementById("saveB");
+saveButton.innerText = "Saving..."
+saveButton.style.backgroundColor = "#1b379b";
+saveButton.style.color = "#f7f9ff";
+setTimeout(() => {
+    saveButton.innerText = "Saved!"
+    saveButton.style.backgroundColor = "#f7f9ff";
+saveButton.style.color =  "#1b379b";
+}, 2000);
+    const vcard = `
 BEGIN:VCARD
 VERSION:3.0
 N:Estrella;Charles David;;;
@@ -281,56 +287,19 @@ ORG:Intern
 TITLE:OJT / Intern
 TEL;TYPE=CELL:+639519014466
 EMAIL:charlesdavidestrella@gmail.com
-PHOTO;ENCODING=b;TYPE=JPEG:${base64Image}
 END:VCARD
-        `.trim();
+    `.trim();
 
-        const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
+    const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
 
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "Charles_David_Estrella.vcf";
-        document.body.appendChild(a);
-        a.click();
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Charles_David_Estrella.vcf";
+    document.body.appendChild(a);
+    a.click();
 
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-
-        btn.innerText = "Saved ✅";
-    } catch (err) {
-        console.error(err);
-        btn.innerText = "Failed ❌";
-        alert("Image could not be saved. Make sure img.jpg is accessible.");
-    }
-
-    btn.disabled = false;
-}
-
-/* ================= IMAGE → BASE64 ================= */
-function getBase64FromImage(imgId) {
-    return new Promise((resolve, reject) => {
-        const img = document.getElementById(imgId);
-
-        if (!img.complete) {
-            img.onload = () => convert();
-        } else {
-            convert();
-        }
-
-        function convert() {
-            const canvas = document.createElement("canvas");
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0);
-
-            const dataURL = canvas.toDataURL("image/jpeg", 0.85);
-            const base64 = dataURL.split(",")[1];
-
-            resolve(base64);
-        }
-    });
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 </script>
