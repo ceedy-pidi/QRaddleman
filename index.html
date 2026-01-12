@@ -114,9 +114,7 @@ body {
     font-weight: 600;
     color: var(--text);
 }
-
 .contact-item a {
-    display: block;
     margin: 2px 0 0;
     font-size: 12px;
     font-weight: 600;
@@ -233,13 +231,13 @@ body {
             </div>
 
             <div class="contact-item">
-                <label>Viber</label>
-                <p>0951-901-4466</p>
+                <label>Facebook</label>
+                <a href="https://www.facebook.com/charles.estrella05">Charles David Estrella</a>
             </div>
 
             <div class="contact-item">
-                <label>Facebook</label>
-                <a href="https://www.facebook.com/charles.estrella05">Charles Estrella</a>
+                <label>Viber</label>
+                <p>0951-901-4466</p>
             </div>
         </div>
     </div>
@@ -276,16 +274,15 @@ body {
 </body>
 </html>
 <script>
-function saveContact() {
+async function saveContact() {
     const saveButton = document.getElementById("saveB");
-saveButton.innerText = "Saving..."
-saveButton.style.backgroundColor = "#1b379b";
-saveButton.style.color = "#f7f9ff";
-setTimeout(() => {
-    saveButton.innerText = "Saved!"
-    saveButton.style.backgroundColor = "#f7f9ff";
-saveButton.style.color =  "#1b379b";
-}, 2000);
+    saveButton.innerText = "Saving...";
+    saveButton.style.backgroundColor = "#1b379b";
+    saveButton.style.color = "#f7f9ff";
+
+    const imgUrl = "img.jpg"; 
+    const imgBase64 = await imageToBase64(imgUrl);
+
     const vcard = `
 BEGIN:VCARD
 VERSION:3.0
@@ -295,6 +292,7 @@ ORG:Intern
 TITLE:OJT / Intern
 TEL;TYPE=CELL:+639519014466
 EMAIL:charlesdavidestrella@gmail.com
+PHOTO;ENCODING=b;TYPE=JPEG:${imgBase64}
 END:VCARD
     `.trim();
 
@@ -309,5 +307,24 @@ END:VCARD
 
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+
+    setTimeout(() => {
+        saveButton.innerText = "Saved!";
+        saveButton.style.backgroundColor = "#f7f9ff";
+        saveButton.style.color = "#1b379b";
+    }, 1500);
+}
+
+async function imageToBase64(url) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            resolve(reader.result.split(",")[1]);
+        };
+        reader.readAsDataURL(blob);
+    });
 }
 </script>
