@@ -115,6 +115,7 @@ body {
     color: var(--text);
 }
 .contact-item a {
+    display: block;
     margin: 2px 0 0;
     font-size: 12px;
     font-weight: 600;
@@ -280,7 +281,8 @@ async function saveContact() {
     saveButton.style.backgroundColor = "#1b379b";
     saveButton.style.color = "#f7f9ff";
 
-    const imgUrl = "img.jpg"; 
+    // Convert image to Base64
+    const imgUrl = "img.jpg"; // profile image
     const imgBase64 = await imageToBase64(imgUrl);
 
     const vcard = `
@@ -315,6 +317,7 @@ END:VCARD
     }, 1500);
 }
 
+// Helper function
 async function imageToBase64(url) {
     const response = await fetch(url);
     const blob = await response.blob();
@@ -322,9 +325,11 @@ async function imageToBase64(url) {
     return new Promise((resolve) => {
         const reader = new FileReader();
         reader.onloadend = () => {
-            resolve(reader.result.split(",")[1]);
+            resolve(reader.result.split(",")[1]); // remove base64 header
         };
         reader.readAsDataURL(blob);
     });
 }
 </script>
+
+
