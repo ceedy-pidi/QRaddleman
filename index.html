@@ -1,286 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Personal Information</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Information</title>
 
-<style>
-:root {
-    --primary: #2f51a8;
-    --dark: #1c1c1c;
-    --light: #f7f9fb;
-    --text: #2f2f2f;    
+    <style>
+      :root {
+        --primary: #2f51a8;
+        --dark: #1c1c1c;
+        --light: #f7f9fb;
+        --text: #2f2f2f;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background-color: #f7f9fb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .main-wrapper {
+        width: 650px;
+        min-width: 450px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 18px;
+      }
+
+      .profile-container {
+        background: url("ADM3.png") center / cover;
+        overflow: hidden;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+
+      .profile-overlay {
+        background: linear-gradient(180deg, #00000022, #0f44c9d6);
+        padding: 40px;
+        text-align: center;
+      }
+
+      .profile-img {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #1c49bbd0;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        margin: 15px 0;
+      }
+
+      .profile-name {
+        font-size: 26px;
+        font-weight: 700;
+        color: #232e49;
+        z-index: 1;
+      }
+
+      .profile-role {
+        font-size: 10px;
+        letter-spacing: 1px;
+        color: #eaebecaa;
+        text-transform: uppercase;
+      }
+
+      .contact-container {
+        background: #ffffff;
+        padding: 25px;
+        box-shadow: inset 0 10px 25px rgba(15, 68, 201, 0.7);
+        border: var(--primary);
+      }
+
+      .contact-title {
+        font-size: 14px;
+        letter-spacing: 2px;
+        color: var(--primary);
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .contact-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+      }
+
+      .contact-item {
+        background: var(--light);
+        border-left: 4px solid var(--primary);
+        border-radius: 10px;
+        padding: 7px 16px;
+      }
+
+      .contact-item label {
+        font-size: 10px;
+        color: #777;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .contact-item p {
+        margin: 2px 0 0;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .contact-item a {
+        display: block;
+        margin: 2px 0 0;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .gov-container {
+        background: linear-gradient(135deg, #1b379b, #0f1f5c);
+        color: #ffffff;
+        padding: 25px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+
+      .gov-title {
+        font-size: 14px;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .gov-item {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 3px 16px;
+        margin-bottom: 5px;
+      }
+      .gov-item label {
+        font-size: 10px;
+        letter-spacing: 1px;
+        opacity: 0.8;
+        text-transform: uppercase;
+      }
+
+      .gov-item p {
+        margin-top: 1px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      @media (max-width: 680px) {
+        .main-wrapper {
+          width: 92%;
+        }
+
+        .contact-list {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .save {
+        width: 100%;
+        margin-top: 10px;
+        padding: 8px;
+        border: none;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #2f51a8;
+        background: linear-gradient(135deg, #ffffff, #e6ebff);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        transition: all 0.3s ease;
+      }
+
+      .save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+        background: linear-gradient(135deg, #f7f9ff, #dfe6ff);
+      }
+
+      .save:active {
+        transform: scale(0.97);
+      }
+
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
 }
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    background-color: #f7f9fb;
-    font-family: "Segoe UI", Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.main-wrapper {
-    width: 650px;
-    min-width: 450px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 18px;
-}
-
-.profile-container {
-    background: url("ADM3.png") center / cover;
-    overflow: hidden;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-}
-
-.profile-overlay {
-    background: linear-gradient(180deg, #00000022, #0f44c9d6);
-    padding: 40px;
-    text-align: center;
-}   
-
-
-
-.profile-img {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #1c49bbd0;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    margin: 15px 0;
-}
-
-.profile-name {
-    font-size: 26px;
-    font-weight: 700;
-    color: #232e49;
-    z-index: 1;
-}
-
-.profile-role {
-    font-size: 10px;
-    letter-spacing: 1px;
-    color: #eaebecaa;
-    text-transform: uppercase;
-}
-
-.contact-container {
-    background: #ffffff;
-    padding: 25px;
-    box-shadow: inset 0 10px 25px rgba(15, 68, 201, 0.70);
-    border: var(--primary);
-}
-
-.contact-title {
-    font-size: 14px;
-    letter-spacing: 2px;
-    color: var(--primary);
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.contact-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 7px;
-}
-
-.contact-item {
-    background: var(--light);
-    border-left: 4px solid var(--primary);
-    border-radius: 10px;
-    padding: 7px 16px;
-}
-
-.contact-item label {
-    font-size: 10px;
-    color: #777;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.contact-item p {
-    margin: 2px 0 0;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text);
-}
-.contact-item a {
-    display: block;
-    margin: 2px 0 0;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text);
-}
-
-.gov-container {
-    background: linear-gradient(135deg, #1b379b, #0f1f5c);
-    color: #ffffff;
-    padding: 25px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.gov-title {
-    font-size: 14px;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.gov-item {
-    background: rgba(255,255,255,0.12);
-    border-radius: 10px;
-    padding: 3px 16px;
-    margin-bottom: 5px;
-}
-.gov-item label {
-    font-size: 10px;
-    letter-spacing: 1px;
-    opacity: 0.8;
-    text-transform: uppercase;
-}
-
-.gov-item p {
-    margin-top: 1px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-@media (max-width: 680px) {
-    .main-wrapper {
-        width: 92%;
-    }
-
-    .contact-list {
-        grid-template-columns: 1fr;
-    }
-}
-
-.save {
-    width: 100%;
-    margin-top: 10px;
-    padding: 8px;
-    border: none;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    color: #2f51a8;
-    background: linear-gradient(135deg, #ffffff, #e6ebff);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-    transition: all 0.3s ease;
-}
-
-.save:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
-    background: linear-gradient(135deg, #f7f9ff, #dfe6ff);
-}
-
-.save:active {
-    transform: scale(0.97);
-}
-
 </style>
-</head>
+  </head>
 
-<body>
-
-<div class="main-wrapper">
-
-    <div class="profile-container">
+  <body>
+    <div class="main-wrapper">
+      <div class="profile-container">
         <div class="profile-overlay">
-            <img src="img.jpg" class="profile-img">
+          <img src="img.jpg" class="profile-img" />
 
-            <div class="profile-name">Charles David G. Estrella</div>
-            <div class="profile-role">OJT / Intern</div>
+          <div class="profile-name">Charles David G. Estrella</div>
+          <div class="profile-role">OJT / Intern</div>
         </div>
-    </div>
-    
-    <div class="contact-container">
+      </div>
+
+      <div class="contact-container">
         <div class="contact-title">Contact Informations</div>
 
         <div class="contact-list">
-            
-            <div class="contact-item">
-                <label>Email</label>
-                <p>charlesdavidestrella@gmail.com</p>
-            </div>
+          <div class="contact-item">
+            <label>Email</label>
+            <p>charlesdavidestrella@gmail.com</p>
+          </div>
 
-            <div class="contact-item">
-                <label>Contact Number</label>
-                <p>(+63) 951 901 4466</p>
-            </div>
+          <div class="contact-item">
+            <label>Contact Number</label>
+            <p>(+63) 951 901 4466</p>
+          </div>
 
-            <div class="contact-item">
-                <label>WhatsApp</label>
-                <p>0951-901-4466</p>
-            </div>
+          <div class="contact-item">
+            <label>WhatsApp</label>
+            <p>0951-901-4466</p>
+          </div>
 
-            <div class="contact-item">
-                <label>Facebook</label>
-                <a href="https://www.facebook.com/charles.estrella05">Charles David Estrella</a>
-            </div>
+          <div class="contact-item">
+            <label>Facebook</label>
+            <a href="https://www.facebook.com/charles.estrella05"
+              >Charles David Estrella</a
+            >
+          </div>
 
-            <div class="contact-item">
-                <label>Viber</label>
-                <p>0951-901-4466</p>
-            </div>
+          <div class="contact-item">
+            <label>Viber</label>
+            <p>0951-901-4466</p>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <div class="gov-container">
+      <div class="gov-container">
         <div class="gov-title">Government IDs</div>
 
-        <div class="gov-item">
-            <label>SSS</label>
-            <p>XXXXXXXXXX</p>
+        <div class="gov-item secure-id" data-real="34-5678901-2">
+          <label>SSS</label>
+          <p>•••••••••••</p>
         </div>
 
-        <div class="gov-item">
-            <label>Pag-IBIG</label>
-            <p>XXXXXXXXXX</p>
+        <div class="gov-item secure-id" data-real="1234-5678-9012">
+          <label>Pag-IBIG</label>
+          <p>•••••••••••</p>
         </div>
 
-        <div class="gov-item">
-            <label>TIN</label>
-            <p>XXXXXXXXXX</p>
+        <div class="gov-item secure-id" data-real="123-456-789-000">
+          <label>TIN</label>
+          <p>•••••••••••</p>
         </div>
 
-        <div class="gov-item">
-            <label>PhilHealth</label>
-            <p>XXXXXXXXXX</p>
+        <div class="gov-item secure-id" data-real="12-345678901-2">
+          <label>PhilHealth</label>
+          <p>•••••••••••</p>
         </div>
 
-        <button class="save" id="saveB" onclick="saveContact()"> Save Contact</button>
+        <button class="save" id="saveB" onclick="saveContact()">
+          Save Contact
+        </button>
+      </div>
+    </div>
+    <div
+      id="pinModal"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      "
+    >
+      <div
+        style="
+          background: #fff;
+          padding: 26px;
+          border-radius: 16px;
+          width: 280px;
+          position: relative;
+          text-align: center;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        "
+      >
+        <button
+          onclick="closePIN()"
+          style="
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            border: none;
+            background: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #777;
+          "
+        >
+          ✕
+        </button>
 
+        <h3 style="margin: 0 0 8px; color: #2f51a8">Security Access</h3>
+        <p style="font-size: 12px; color: #555">
+          Enter 4-digit PIN<br />
+          <span id="attemptText">Attempts left: 3</span>
+        </p>
+
+        <input
+          type="password"
+          id="pinInput"
+          maxlength="4"
+          style="
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            text-align: center;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            letter-spacing: 8px;
+          "
+        />
+
+        <button class="save" style="margin-top: 14px" onclick="verifyPIN()">
+          Verify
+        </button>
+      </div>
     </div>
 
-</div>
+<div id="loader" style="
+    position:fixed;
+    inset:0;
+    background: linear-gradient(135deg, #2f51a8, #0f44c9);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:#ffffff;
+    z-index:2000;
+    text-align:center;
+">
 
-</body>
+    <img src="logo1.png" alt="Company Logo" style="
+        width:120px;
+        height:auto;
+        margin-bottom:10px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #f8f8f8d0;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    ">
+
+    <h1 style="margin:0; font-size:25px; font-weight:700;">Welcome!</h1>
+    <p style="font-size:11px; margin-top:8px; max-width:300px;">
+        Hello! This page contains the contact information and government IDs.  
+        Please use this responsibly.
+    </p>
+
+    <div style="
+        margin-top:20px;
+        border:4px solid rgba(255,255,255,0.3);
+        border-top:4px solid #ffffff;
+        border-radius:50%;
+        width:40px;
+        height:40px;
+        animation:spin 1s linear infinite;
+    "></div>
+
+</div>
+  </body>
 </html>
 <script>
-async function saveContact() {
+  async function saveContact() {
     const saveButton = document.getElementById("saveB");
     saveButton.innerText = "Saving...";
     saveButton.style.backgroundColor = "#1b379b";
     saveButton.style.color = "#f7f9ff";
 
-    const imgUrl = "img.jpg"; 
+    const imgUrl = "img.jpg";
     const imgBase64 = await imageToBase64(imgUrl);
 
     const vcard = `
@@ -309,24 +415,89 @@ END:VCARD
     URL.revokeObjectURL(url);
 
     setTimeout(() => {
-        saveButton.innerText = "Saved!";
-        saveButton.style.backgroundColor = "#f7f9ff";
-        saveButton.style.color = "#1b379b";
+      saveButton.innerText = "Saved!";
+      saveButton.style.backgroundColor = "#f7f9ff";
+      saveButton.style.color = "#1b379b";
     }, 1500);
-}
+  }
 
-async function imageToBase64(url) {
+  async function imageToBase64(url) {
     const response = await fetch(url);
     const blob = await response.blob();
 
     return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            resolve(reader.result.split(",")[1]); 
-        };
-        reader.readAsDataURL(blob);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result.split(",")[1]);
+      };
+      reader.readAsDataURL(blob);
     });
-}
+  }
+
+  const ACCESS_PIN = "1234";
+  const MAX_ATTEMPTS = 3;
+
+  let attemptsLeft = MAX_ATTEMPTS;
+  let accessGranted = false;
+  let locked = false;
+
+  document.querySelectorAll(".secure-id").forEach((item) => {
+    item.addEventListener("click", () => {
+      if (locked) {
+        alert("Access locked due to multiple failed attempts.");
+        return;
+      }
+      if (!accessGranted) {
+        openPIN();
+      }
+    });
+  });
+
+  function openPIN() {
+    document.getElementById("pinModal").style.display = "flex";
+    document.getElementById("pinInput").value = "";
+    document.getElementById(
+      "attemptText"
+    ).innerText = `Attempts left: ${attemptsLeft}`;
+    document.getElementById("pinInput").focus();
+  }
+
+  function closePIN() {
+    document.getElementById("pinModal").style.display = "none";
+  }
+
+  function verifyPIN() {
+    const pin = document.getElementById("pinInput").value;
+
+    if (pin === ACCESS_PIN) {
+      revealIDs();
+      closePIN();
+    } else {
+      attemptsLeft--;
+      document.getElementById(
+        "attemptText"
+      ).innerText = `Attempts left: ${attemptsLeft}`;
+
+      if (attemptsLeft <= 0) {
+        locked = true;
+        closePIN();
+        alert("Access locked. Too many failed attempts.");
+      } else {
+        alert("Incorrect PIN.");
+      }
+    }
+  }
+
+  function revealIDs() {
+    document.querySelectorAll(".secure-id").forEach((item) => {
+      item.querySelector("p").textContent = item.dataset.real;
+    });
+    accessGranted = true;
+  }
+
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+    }, 2500); 
+});
 </script>
-
-
