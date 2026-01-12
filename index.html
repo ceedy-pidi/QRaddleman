@@ -7,7 +7,7 @@
 
 <style>
 :root {
-    --primary: #1b379b;
+    --primary: #2f51a8;
     --dark: #1c1c1c;
     --light: #f7f9fb;
     --text: #2f2f2f;    
@@ -32,7 +32,7 @@ body {
 }
 
 .profile-container {
-    background: url("AMBG.png") center / cover;
+    background: url("ADM1.png") center / cover;
     overflow: hidden;
     box-shadow: 0 25px 50px rgba(0,0,0,0.35);
     border-top-left-radius: 15px;
@@ -40,7 +40,7 @@ body {
 }
 
 .profile-overlay {
-    background: rgba(255,255,255,0.78);
+    background: linear-gradient(180deg, #00000022, #0f44c9ec);
     padding: 40px;
     text-align: center;
 }
@@ -52,7 +52,7 @@ body {
     height: 140px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--primary);
+    border: 4px solid #1c49bb;
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     margin: 15px 0;
 }
@@ -60,22 +60,21 @@ body {
 .profile-name {
     font-size: 26px;
     font-weight: 700;
-    color: var(--text);
+    color: #232e49;
     z-index: 1;
-    text-shadow: #ffffff 1px 1px 2px;
 }
 
 .profile-role {
     font-size: 10px;
     letter-spacing: 1px;
-    color: #555;
+    color: #d4d5d8b7;
     text-transform: uppercase;
 }
 
 .contact-container {
     background: #ffffff;
     padding: 25px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    box-shadow: inset 0 10px 30px #0f44c9e3;
     border: var(--primary);
 }
 
@@ -179,7 +178,7 @@ body {
     letter-spacing: 1px;
     text-transform: uppercase;
     cursor: pointer;
-    color: #1b379b;
+    color: #2f51a8;
     background: linear-gradient(135deg, #ffffff, #e6ebff);
     box-shadow: 0 10px 25px rgba(0,0,0,0.25);
     transition: all 0.3s ease;
@@ -281,8 +280,7 @@ async function saveContact() {
     saveButton.style.backgroundColor = "#1b379b";
     saveButton.style.color = "#f7f9ff";
 
-    // Convert image to Base64
-    const imgUrl = "img.jpg"; // profile image
+    const imgUrl = "img.jpg"; 
     const imgBase64 = await imageToBase64(imgUrl);
 
     const vcard = `
@@ -317,7 +315,6 @@ END:VCARD
     }, 1500);
 }
 
-// Helper function
 async function imageToBase64(url) {
     const response = await fetch(url);
     const blob = await response.blob();
@@ -325,7 +322,7 @@ async function imageToBase64(url) {
     return new Promise((resolve) => {
         const reader = new FileReader();
         reader.onloadend = () => {
-            resolve(reader.result.split(",")[1]); // remove base64 header
+            resolve(reader.result.split(",")[1]); 
         };
         reader.readAsDataURL(blob);
     });
