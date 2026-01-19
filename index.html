@@ -73,10 +73,10 @@
 
       .contact-container {
         background: #ffffff;
-        padding-left: 45px;
-        padding-bottom: 30px;
-        padding-right: 45px;
-        padding-top: 30px;
+        padding-left: 35px;
+        padding-bottom: 25px;
+        padding-right: 35px;
+        padding-top: 25px;
         box-shadow: inset 0 10px 25px rgba(15, 68, 201, 0.7);
         border: var(--primary);
       }
@@ -127,10 +127,10 @@
       .gov-container {
         background: linear-gradient(135deg, #1b379b, #0f1f5c);
         color: #ffffff;
-        padding-left: 45px;
-        padding-bottom: 30px;
-        padding-right: 45px;
-        padding-top: 30px;
+        padding-left: 35px;
+        padding-bottom: 20px;
+        padding-right: 35px;
+        padding-top: 20px;
         box-shadow: inset 0 10px 25px rgba(240, 240, 240, 0.525);
         border-bottom-left-radius: 15px;
         border-bottom-right-radius: 15px;
@@ -216,48 +216,70 @@
   margin-right: 6px;
 }
 
+.sticky-profile {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.scroll-content {
+  overflow-y: auto;
+  max-height: calc(90vh - 280px);
+}
+.scroll-content {
+  overflow-y: auto;
+
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
+}
+
+.scroll-content::-webkit-scrollbar {
+  display: none;
+}
+
 </style>
   </head>
 
   <body>
     <div class="main-wrapper">
-      <div class="profile-container">
+      <div class="profile-container sticky-profile">
         <div class="profile-overlay">
-          <img src="img.jpg" class="profile-img" />
+          <img src="img1.jpg" class="profile-img" />
 
-          <div class="profile-name">Charles David G. Estrella</div>
-          <div class="profile-role">OJT / Intern</div>
+          <div class="profile-name">Erick Yosorez Villafuerte</div>
+          <div class="profile-role">HR Specialist</div>
         </div>
       </div>
-
+<div class="scroll-content">
       <div class="contact-container">
   <div class="contact-title">Contact Informations</div>
 
   <div class="contact-list">
     <div class="contact-item">
       <label><i class="fas fa-envelope"></i> Email</label>
-      <p>charlesdavidestrella@gmail.com</p>
+      <p>eyv.addleman@gmail.com</p>
     </div>
 
     <div class="contact-item">
       <label><i class="fas fa-phone"></i> Contact Number</label>
-      <p>(+63) 951 901 4466</p>
+      <p>(+63)963 362 1187</p>
     </div>
 
     <div class="contact-item">
       <label><i class="fab fa-whatsapp"></i> WhatsApp</label>
-      <p>0951-901-4466</p>
+      <p>0963-362-1187</p>
     </div>
 
     <div class="contact-item">
       <label><i class="fab fa-viber"></i> Viber</label>
-      <p>0951-901-4466</p>
+      <p>0963-362-1187</p>
     </div>
 
     <div class="contact-item">
       <label><i class="fab fa-facebook"></i> Facebook</label>
-      <a href="https://www.facebook.com/charles.estrella05"
-        >Charles David Estrella</a
+      <a href="https://www.facebook.com/erick.villafuerte.790"
+        >Erick Villafuerte</a
       >
     </div>
   </div>
@@ -266,22 +288,22 @@
 <div class="gov-container">
   <div class="gov-title">Government IDs</div>
   <div class="contact-list">
-  <div class="gov-item secure-id" data-real="34-5678901-2">
+  <div class="gov-item secure-id" data-real="34-62644135-0">
     <label><i class="fas fa-id-card"></i> SSS</label>
     <p>•••••••••••</p>
   </div>
 
-  <div class="gov-item secure-id" data-real="1234-5678-9012">
+  <div class="gov-item secure-id" data-real="1211-8244-2001">
     <label><i class="fas fa-id-card"></i> Pag-IBIG</label>
     <p>•••••••••••</p>
   </div>
 
-  <div class="gov-item secure-id" data-real="123-456-789-000">
+  <div class="gov-item secure-id" data-real="3974-2067-7000">
     <label><i class="fas fa-id-card"></i> TIN</label>
     <p>•••••••••••</p>
   </div>
 
-  <div class="gov-item secure-id" data-real="12-345678901-2">
+  <div class="gov-item secure-id" data-real="21-0125419295-2">
     <label><i class="fas fa-id-card"></i> PhilHealth</label>
     <p>•••••••••••</p>
   </div>
@@ -289,6 +311,7 @@
   <button class="save" id="saveB" onclick="saveContact()">
     Save Contact
   </button>
+</div>
 </div>
 </div>
     </div>
@@ -414,14 +437,14 @@
     const vcard = `
 BEGIN:VCARD
 VERSION:3.0
-N:Estrella;Charles David;;;
-FN:Charles David G. Estrella
-ORG:Intern
-TITLE:OJT / Intern
-TEL;TYPE=CELL:+639519014466
-TEL;TYPE=VIBER,VOICE:0951-901-4466
-TEL;TYPE=WHATSAPP,VOICE:+639519014466
-EMAIL:charlesdavidestrella@gmail.com
+N:Erick Villafuerte;;;
+FN:Erick Yosorez Villafuerte
+ORG:ADDLEMAN
+TITLE:HR Specialist
+TEL;TYPE=CELL:+639633621187
+TEL;TYPE=VIBER,VOICE:0963-362-1187
+TEL;TYPE=WHATSAPP,VOICE:+639633621187q
+EMAIL:eyv.addleman@gmail.com
 ADR;TYPE=HOME:;;Hagonoy;Bulacan
 PHOTO;ENCODING=b;TYPE=JPEG:${imgBase64}
 END:VCARD
@@ -432,7 +455,7 @@ END:VCARD
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = "Charles_David_Estrella.vcf";
+    a.download = "Erick_Villafuerte.vcf";
     document.body.appendChild(a);
     a.click();
 
